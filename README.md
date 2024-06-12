@@ -7,7 +7,7 @@ Golang orders REST API microservices.
 
 ## Via Docker
 
-### PS: You must use redis as redis host instead localhost if want to use docker. (edit REDIS_ADDR from ```localhost:6379``` to ```redis:6379```)
+### PS: You must use redis as redis host instead localhost if want to use docker. (edit .env file, set REDIS_ADDR from ```localhost:6379``` to ```redis:6379```)
 
 - Build the container
 

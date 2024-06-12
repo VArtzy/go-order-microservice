@@ -16,12 +16,15 @@ func LoadConfig() Config {
         ServerPort: 3000,
     }
 
-    if redisAddr, exists := os.LookupEnv("REDIS_ADDR"); exists {
-        cfg.RedisAddr = redisAddr
+    redisHost := os.Getenv("REDIS_ADDR")
+    if redisHost != "" {
+        cfg.RedisAddr = redisHost
     }
 
-    if serverPort, exists := os.LookupEnv("SERVER_PORT"); exists {
-        if port, err := strconv.ParseUint(serverPort, 10, 16); err == nil {
+    serverPort := os.Getenv("SERVER_PORT")
+    if serverPort != "" {
+        port, err := strconv.ParseUint(serverPort, 10, 16)
+        if err == nil {
             cfg.ServerPort = uint16(port)
         }
     }
