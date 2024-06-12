@@ -8,24 +8,20 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"github.com/vartzy/order-api-microservice/route"
+    "github.com/vartzy/order-api-microservice/types"
 )
 
-type App struct {
-	router http.Handler
-    rdb *redis.Client
-}
-
-func New() *App {
-    app := &App {
-        router: route.LoadRoutes(),
+func New() *types.App {
+    app := &types.App {
         rdb: redis.NewClient(&redis.Options{}),
     }
+
+    app.LoadRoutes()
 
     return app
 }
 
-func (a *App) Start(ctx context.Context) error {
+func (a *types.App) Start(ctx context.Context) error {
     server := &http.Server{
         Addr: ":3000",
         Handler: a.router,

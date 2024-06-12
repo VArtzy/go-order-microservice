@@ -5,9 +5,11 @@ import (
 
     "github.com/go-chi/chi/v5"
     "github.com/go-chi/chi/v5/middleware"
+
+    "github.com/vartzy/order-api-microservice/types"
 )
 
-func LoadRoutes() *chi.Mux {
+func (a *types.App) LoadRoutes() {
     router := chi.NewRouter()
 
     router.Use(middleware.Logger)
@@ -15,7 +17,7 @@ func LoadRoutes() *chi.Mux {
     router.Get("/", func(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusOK)
     })
-    router.Route("/orders", LoadOrderRoutes)
+    router.Route("/orders", a.LoadOrderRoutes)
 
-    return router
+    a.router = router
 }
